@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var models = require('./models')(mongoose);
-
+var models = require('./models');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,29 +9,24 @@ router.get('/', function(req, res, next) {
 
 router.get('concerts/', function (req, res, next) {
   var concerts = [];
-  models.Concert.find(function (err, con) {
+  models.Concert.find(function (err, concerts) {
     if (err) return next(err);
-    concerts = con;
+    res.render('concerts', { 'concerts' : concerts })
   });
-  res.render('concerts', concerts)
 });
 
 router.get('pieces/', function (req, res, next) {
-  var pieces = [];
-  models.Concert.find(function (err, piec) {
+  models.Concert.find(function (err, pieces) {
     if (err) return next(err);
-    pieces = piec;
+    res.render('pieces', { 'pieces' : pieces})
   });
-  res.render('composers', pieces)
 });
 
 router.get('composers/', function (req, res, next) {
-  var composers = [];
-  models.Concert.find(function (err, comp) {
+  models.Concert.find(function (err, composers) {
     if (err) return next(err);
-    composers = comp;
+    res.render('composers', { 'composers' : composers })
   });
-  res.render('composers', composers)
 });
 
 module.exports = router;
