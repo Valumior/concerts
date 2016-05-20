@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 Add Piece
+    form(name="add-composer", method="post")
+        div.input
+            span.label Title
+            input(type="text", name="title")
+        div.input
+            span.label Venue
+            input(type="text", name="venue")
+        div.input
+            span.label Date
+            input(type="datetime-local" name="date")
+        div.actions
+            input(type="submit", value="Add")

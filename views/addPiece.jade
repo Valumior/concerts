@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    h1 Add Piece
+    form(name="add-composer", method="post")
+        div.input
+            span.label Title
+            input(type="text", name="title")
+        div.input
+            span.label Year
+            input(type="text", name="year")
+        div.input
+            span.label Composer
+            select(name="composer")
+                each composer in composers
+                    option(value=composer._id) #{composer.name}
+        div.actions
+            input(type="submit", value="Add")

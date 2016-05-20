@@ -6,12 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/concerto');
+var app = express();
+
+mongoose.connect('mongodb://localhost/concerto');
 
 var index = require('./routes/index');
 var api = require('./routes/api');
 
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

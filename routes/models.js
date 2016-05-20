@@ -5,27 +5,25 @@ var ObjectId = Schema.ObjectId;
 var ComposerSchema = new Schema({
     name    :   String,
     era     :   String
-});
+}, { collection : 'composers' });
 
 var PieceSchema = new Schema({
     title       :   String,
-    id          :   ObjectId,
     year        :   String,
-    composer    :   ComposerSchema
-});
+    composer    :   { type : ObjectId, ref : 'Composer'}
+}, { collection : 'pieces' });
 
 var ConcertSchema = new Schema({
     title   :   String,
-    id      :   ObjectId,
     date    :   Date,
     venue   :   String,
-    pieces  :   [PieceSchema]
-});
+    pieces  :   [{ type : ObjectId, ref : 'Piece' }]
+}, { collection : 'concerts'});
 
 var models = {
-    Concert    :   mongoose.model('concerts', ConcertSchema),
-    Piece      :   mongoose.model('pieces', PieceSchema),
-    Composer   :   mongoose.model('composers', ComposerSchema)
+    Concert    :   mongoose.model('Concert', ConcertSchema),
+    Piece      :   mongoose.model('Piece', PieceSchema),
+    Composer   :   mongoose.model('Composer', ComposerSchema)
 };
 
 module.exports = models;
