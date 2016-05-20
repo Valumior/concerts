@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h2 Concerts
+    ul
+        each concert in concerts
+            li
+                h3= concert.title
+                h4= concert.date + ' ' + concert.venue
+                ul
+                    each piece in concert.pieces
+                        li= piece.name + ' - ' + piece.composer.name

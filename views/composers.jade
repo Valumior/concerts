@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h2 Pieces
+    ul
+        each composer in composers
+            li
+                h3= composer.name
+                h4= composer.era
+
+

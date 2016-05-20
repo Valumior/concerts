@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h2 Pieces
+    ul
+        each piece in pieces
+            li
+                h3= piece.title
+                h4= piece.composer.name + ' (' + piece.year + ')'
+

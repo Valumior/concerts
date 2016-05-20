@@ -2,30 +2,30 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var Composer = new Schema({
+var ComposerSchema = new Schema({
     name    :   String,
     era     :   String
 });
 
-var Piece = new Schema({
+var PieceSchema = new Schema({
     title       :   String,
     id          :   ObjectId,
     year        :   String,
-    composer    :   Composer
+    composer    :   ComposerSchema
 });
 
-var Concert = new Schema({
+var ConcertSchema = new Schema({
     title   :   String,
     id      :   ObjectId,
     date    :   Date,
     venue   :   String,
-    pieces  :   [Piece]
+    pieces  :   [PieceSchema]
 });
 
 var models = {
-    Concerts    :   mongoose.model('concerts', Concert),
-    Pieces      :   mongoose.model('pieces', Piece),
-    Composers   :   mongoose.model('composers', Composer)
+    Concert    :   mongoose.model('concerts', ConcertSchema),
+    Piece      :   mongoose.model('pieces', PieceSchema),
+    Composer   :   mongoose.model('composers', ComposerSchema)
 };
 
 module.exports = models;
