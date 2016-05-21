@@ -9,7 +9,7 @@ var methodOverride = require('method-override');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/concerto');
+mongoose.connect(process.env.MONGODB_URI);
 
 var index = require('./routes/index');
 var api = require('./routes/api');
