@@ -15,7 +15,7 @@ var PieceSchema = new Schema({
 
 var ConcertSchema = new Schema({
     title   :   String,
-    date    :   Date,
+    date    :   String,
     venue   :   String,
     pieces  :   [{ type : ObjectId, ref : 'Piece' }]
 }, { collection : 'concerts'});

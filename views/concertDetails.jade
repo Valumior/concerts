@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1= concert.title
+    h2= concert.date + ' - ' + concert.venue
+    ul
+        each piece in concert.pieces
+            li
+                p= piece.title + ' - ' + piece.composer.name
+                form(method='post', action='/concerts/' + concert.id + '/piece/' + piece.id + '/?_method=DELETE')
+                    button(class='btn btn-default', type='submit') Delete
+    h3 Add piece
+    form(class='form-horizontal', name='add-concert-piece', method='post')
+        div(class='form-group')
+            label(class='control-label col-sm-2') Piece:
+            div(class='col-sm-10')
+                select(name="piece")
+                    each piece in pieces
+                        option(value=piece.id) #{piece.title}
+        div(class='form-group')
+            div(class='col-sm-offset-2 col-sm-10')
+                input(type="submit", value="Add")

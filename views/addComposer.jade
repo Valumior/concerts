@@ -2,12 +2,15 @@ extends layout
 
 block content
     h1 Add Composer
-    form(name="add-composer", method="post")
-        div.input
-            span.label Name
-            input(type="text", name="name")
-        div.input
-            span.label Era
-            input(type="text", name="era")
-        div.actions
-            input(type="submit", value="Add")
+    form(class='form-horizontal', name='add-composer', method='post')
+        div(class='form-group')
+            label(class='control-label col-sm-2') Name:
+            div(class='col-sm-10')
+                input(type='text', name='name', class='form-control', placeholder='Enter name')
+        div(class='form-group')
+            label(class='control-label col-sm-2') Era:
+            div(class='col-sm-10')
+                input(type='text', name='era', class='form-control', placeholder='Enter era')
+        div(class='form-group')
+            div(class='col-sm-offset-2 col-sm-10')
+                input(type="submit", value="Add")

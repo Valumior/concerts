@@ -95,6 +95,7 @@ router.post('/composers/', function (req, res, next) {
 router.get('/composers/:id/', function (req, res, next) {
     models.Composer.findById(req.params.id, function (err, comp) {
         if (err) return next(err);
+        console.log(comp._id)
         res.json(comp)
     });
 });

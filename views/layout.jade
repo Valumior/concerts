@@ -2,14 +2,18 @@ doctype html
 html
     head
         title= title
-        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+        script(type='text/javascript', src='/javascripts/bootstrap.min.js')
     body
-        nav
-            ul
-                li: a(href='/') Home
-                li: a(href='/concerts/') Concerts
-                li: a(href='/pieces/') Pieces
-                li: a(href='/composers/') Composers
-                li: a(href='/api/') API Index
-    div
+        nav(class='navbar navbar-inverse')
+            div(class='container-fluid')
+                div(class='navbar-header')
+                    a(class='navbar-brand', href='/') Concerto
+                ul(class='nav navbar-nav')
+                    li: a(href='/') Home
+                    li: a(href='/concerts/') Concerts
+                    li: a(href='/pieces/') Pieces
+                    li: a(href='/composers/') Composers
+                    li: a(href='/api/') API Index
+    div(style='padding:10px')
         block content

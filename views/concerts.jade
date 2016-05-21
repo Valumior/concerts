@@ -2,12 +2,12 @@ extends layout
 
 block content
     h2 Concerts
-    a(href="/composers/add/") Add concert
+    a(href="/concerts/add/", class='btn btn-default') Add concert
     ul
         each concert in concerts
             li
-                h3= concert.title
-                h4= concert.date + ' ' + concert.venue
+                h3: a(href='/concerts/' + concert.id + '/') #{concert.title}
+                h4= concert.date + ' - ' + concert.venue
                 ul
                     each piece in concert.pieces
-                        li= piece.name + ' - ' + piece.composer.name
+                        li= piece.title + ' - ' + piece.composer.name

@@ -2,17 +2,21 @@ extends layout
 
 block content
     h1 Add Piece
-    form(name="add-composer", method="post")
-        div.input
-            span.label Title
-            input(type="text", name="title")
-        div.input
-            span.label Year
-            input(type="text", name="year")
-        div.input
-            span.label Composer
-            select(name="composer")
-                each composer in composers
-                    option(value=composer._id) #{composer.name}
-        div.actions
-            input(type="submit", value="Add")
+    form(class='form-horizontal', name="add-piece", method="post")
+        div(class='form-group')
+            label(class='control-label col-sm-2') Title:
+            div(class='col-sm-10')
+                input(type="text", name="title", placeholder='Title')
+        div(class='form-group')
+            label(class='control-label col-sm-2') Year:
+            div(class='col-sm-10')
+                input(type="text", name="year", placeholder='Year')
+        div(class='form-group')
+            label(class='control-label col-sm-2') Composer:
+            div(class='col-sm-10')
+                select(name="composer")
+                    each composer in composers
+                        option(value=composer.id) #{composer.name}
+        div(class='form-group')
+            div(class='col-sm-offset-2 col-sm-10')
+                input(type="submit", value="Add")

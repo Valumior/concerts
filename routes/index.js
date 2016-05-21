@@ -8,11 +8,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/concerts/', function (req, res, next) {
-  var concerts = [];
-  models.Concert.find(function (err, concerts) {
-    if (err) return next(err);
-    res.render('concerts', { concerts : concerts })
-  });
+    models.Concert.find().populate({ path : 'pieces', model : 'Piece', populate : { path : 'composer', model : 'Composer'}})
+        .exec(function (err, concerts) {
+        if (err) return next(err);
+        res.render('concerts', { concerts : concerts })
+    });
 });
 
 router.get('/concerts/add/', function (req, res, next) {
@@ -20,10 +20,39 @@ router.get('/concerts/add/', function (req, res, next) {
 });
 
 router.post('/concerts/add/', function (req, res, next) {
-    models.Concert.create({ title : req.body.title, venue : req.body.venue, 
+    models.Concert.create({ title : req.body.title, venue : req.body.venue,
         date : req.body.date, pieces : []}, function (err, concert){
         if (err) return next(err);
         res.redirect('/concerts/');
+    });
+});
+
+router.get('/concerts/:id/', function (req, res, next) {
+    models.Concert.findById(req.params.id).populate({ path : 'pieces', model : 'Piece', populate : { path : 'composer', model : 'Composer'}})
+        .exec(function (err, concert) {
+        if (err) return next(err);
+        models.Piece.find({ '_id' : { $nin : concert.pieces }}).populate('composer').exec(function (err, pieces) {
+            if (err) return next(err);
+            res.render('concertDetails', { concert : concert , pieces : pieces });
+        });
+    });
+});
+
+router.post('/concerts/:id/', function (req, res, next) {
+    models.Concert.findById(req.params.id).populate('pieces').exec(function (err, concert) {
+        if (err) return next(err);
+        concert.pieces.push({ _id : req.body.piece });
+        concert.save();
+        res.redirect('/concerts/' + concert.id + '/');
+    });
+});
+
+router.delete('/concerts/:conId/piece/:pieId/', function (req, res, next) {
+    models.Concert.findById(req.params.conId).populate('pieces').exec(function (err, concert) {
+        if (err) return next(err);
+        concert.pieces.pull({ _id : req.params.pieId });
+        concert.save();
+        res.redirect('/concerts/' + concert.id + '/');
     });
 });
 
