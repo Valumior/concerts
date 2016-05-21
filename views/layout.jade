@@ -4,8 +4,8 @@ html
         title= title
         link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
         script(type='text/javascript', src='/javascripts/bootstrap.min.js')
-    body
-        nav(class='navbar navbar-inverse')
+    body(style='background-color:beige;')
+        nav(class='navbar navbar-inverse', style='margin-bottom:0;')
             div(class='container-fluid')
                 div(class='navbar-header')
                     a(class='navbar-brand', href='/') Concerto
@@ -15,5 +15,7 @@ html
                     li: a(href='/pieces/') Pieces
                     li: a(href='/composers/') Composers
                     li: a(href='/api/') API Index
-    div(style='padding:10px')
+    div(class='row')
+        div(class='col-lg-12 col-md-12 col-sm-12 col-xs-12', style='background-image:url(/images/music-banner.jpg);height:150px;background-size:75%')
+    div(class='container-fluid')
         block content
